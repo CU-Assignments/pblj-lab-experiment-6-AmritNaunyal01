@@ -17,8 +17,47 @@ Step 2: Create the Main Class
   
 Step 3: Display the Sorted List
 Use forEach() with a method reference to print the sorted employees.
+import java.util.*;
+
+class Employee {
+    String name;
+    int age;
+    double salary;
+
+    Employee(String name, int age, double salary) {
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return name + " - Age: " + age + ", Salary: " + salary;
+    }
+}
+
+public class EmployeeSort {
+    public static void main(String[] args) {
+        List<Employee> employees = new ArrayList<>(Arrays.asList(
+            new Employee("Ayush", 20, 90000),
+            new Employee("Vinay", 22, 100000),
+            new Employee("Prakul", 23, 70000)
+        ));
+
+        employees.sort(Comparator.comparing(emp -> emp.name));
+        System.out.println("Sorted by Name: " + employees);
+
+        employees.sort(Comparator.comparingInt(emp -> emp.age));
+        System.out.println("Sorted by Age: " + employees);
+
+        employees.sort(Comparator.comparingDouble(emp -> emp.salary));
+        System.out.println("Sorted by Salary: " + employees);
+    }
+}
 
 
+
+  
 Test Cases
 Test Case         	Input Data                                                      	                    Expected Output
 Case 1:       Sorting by Name	Alice (30, 50000), Bob (25, 60000), Charlie (35, 55000)	                    Alice, Bob, Charlie (sorted alphabetically)

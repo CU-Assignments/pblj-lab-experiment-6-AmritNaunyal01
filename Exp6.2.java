@@ -15,7 +15,48 @@ Step 2: Create the StudentFilterSort Class
       Collect the results into a new list.
 - Use forEach() with a method reference to display results.ts.
 
+import java.util.*;
+import java.util.stream.Collectors;
 
+class Student {
+    private String name;
+    private double marks;
+
+    public Student(String name, double marks) {
+        this.name = name;
+        this.marks = marks;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getMarks() {
+        return marks;
+    }
+}
+
+public class StudentFilter {
+    public static void main(String[] args) {
+        List<Student> students = new ArrayList<>(List.of(
+            new Student("Ayush", 85),
+            new Student("Rajeev", 70),
+            new Student("Vinay", 90),
+            new Student("David", 60),
+            new Student("Prakul", 80)
+        ));
+
+        List<String> topStudents = students.stream()
+            .filter(s -> s.getMarks() > 75)
+            .sorted(Comparator.comparingDouble(Student::getMarks).reversed())
+            .map(Student::getName)
+            .collect(Collectors.toList());
+
+        System.out.println("Top Students: " + topStudents);
+    }
+}
+
+    
 Test Case	                        Input Data	                                                 Expected Output
 Case 1:         Normal Case	Alice (80), Bob (72), Charlie (90), David (65), Eve (85)	         Charlie, Eve, Alice (Sorted by marks)
 Case 2:         All Below 75%	Bob (70), David (60), Frank (65)	                               No output (Empty List)
